@@ -3,6 +3,8 @@ task :default => :setup
 TARGET_VERSION = 'Ver.1.48.19'.freeze
 FILE_NAME = "DodontoF_#{TARGET_VERSION}.zip".freeze
 
+task :setup => [:download, :unzip]
+
 task :unzip do
   `unzip #{FILE_NAME}`
 end
