@@ -5,13 +5,18 @@ require 'rack-post_body_msgpack_parser'
 require 'sinatra/base'
 require 'oj'
 
-require_relative '../src_ruby/config'
+require_relative '../DodontoF_WebSet/public_html/DodontoF/src_ruby/config'
 require_relative 'rack_deflater'
 require_relative 'customized_server'
 
 Oj.default_options = {mode: :compat}
 
-DIR_PATH = File.expand_path('../', File.dirname(__FILE__)).freeze
+DIR_PATH = File.expand_path('../DodontoF_WebSet/public_html/DodontoF', File.dirname(__FILE__)).freeze
+
+$SAVE_DATA_DIR = "./DodontoF_WebSet".freeze
+$loginCountFileFullPath = File.join($SAVE_DATA_DIR, 'saveData', $loginCountFile).freeze
+
+$imageUploadDir = "./DodontoF_WebSet/public_html/imageUploadSpace".freeze
 
 #TODO webif未着手
 
@@ -28,12 +33,7 @@ class DodontoFRackApp < Sinatra::Base
     def server(params)
       @server = DodontoF::Server.new(params)
 
-      if @server.isJsonResult
-        content_type :json, charset:'utf-8'
-      else
-        content_type :msgpack, charset:'x-user-defined'
-      end
-
+      content_type :json, charset:'utf-8'
       @server.response_body
     end
   end

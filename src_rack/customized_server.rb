@@ -3,13 +3,13 @@
 require 'msgpack'
 require 'oj'
 
-require_relative '../DodontoFServer'
+require_relative '../DodontoF_WebSet/public_html/DodontoF/DodontoFServer.rb'
 
 module DodontoF
 
   # versionをcustomized_serverが対応している版に固定
-  LATEST_VERSION = 'Ver.1.45.04'.freeze
-  LATEST_DATE = '2014/07/25'.freeze
+  LATEST_VERSION = VERSION.freeze
+  LATEST_DATE = RELEASE_DATE.freeze
   $version = "#{LATEST_VERSION}(#{LATEST_DATE})"
 
   class Server < DodontoFServer
